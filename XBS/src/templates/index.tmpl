@@ -3,17 +3,115 @@
 <head>
     <title>香色书源转换</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #fffcea;
+        }
+
+        form {
+            /* display: flex; */
+            height: 400px;
+        }
+
+        [type="file"] {
+            color: red;
+            /* font-size: 0; */
+        }
+
+        ::file-selector-button {
+            height: 3rem;
+            color: #fff;
+            border-radius: 10px;
+            border: 1px solid #a5f2e7;
+            padding: 0.75rem 1rem;
+            background-color: #a5f2e7;
+            cursor: pointer;
+        }
+
+        ::-ms-browse {
+            height: 3rem;
+            color: #fff;
+            border-radius: 10px;
+            border: 1px solid #a5f2e7;
+            padding: 0.75rem 1rem;
+            background-color: #a5f2e7;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            color: #8983f3;
+            background-color: #a5f2e7;
+            margin: 0px;
+
+            /* display: none; */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%;
+        }
+
+        #output {
+            width: 50%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #download-link {
+            width: 50%;
+            text-align: center;
+            display: flex;
+  flex-direction: column;
+  justify-content: center;
+        }
+
+        .sa {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            /* width: 200px; */
+            /* height: 30px; */
+            text-align: center;
+            background-color: #93ee23;
+            border: 0px;
+            border-radius: 4px;
+            width: 120px;
+            margin: 10px;
+            height: 60px;
+            color: rgba(203, 18, 176, 0.857);
+        }
+
+        .box {
+            background-color: #a5f2e7;
+            margin-top: 80px;
+            height: 50px;
+            text-align: center;
+            display: flex;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>文件转换（XBS、JSON）</h1>
+  <h1>文件转换（XBS、JSON）</h1>
     <form method="POST" action="{{ .action }}" enctype="multipart/form-data">
         <input type="file" name="file" />
-        <button>上传文件</button>
-    </form>
+        <div class="sa"> <button>转换文件</button> </div>
 
-    <div id="output"></div>
-    <div id="download-link"></div>
+    </form>
+    <div class="box">
+        <div id="output"></div>
+        <div id="download-link"></div>
+    </div>
     <script>
         function pollConversion(flag) {
             fetch("/api/conversion-status", {
@@ -31,7 +129,7 @@
                         var download_url = window.location.protocol + "//" + window.location.host + "/download-file/" + flag;
                         let download_link = document.createElement("a");
                         download_link.href = download_url;
-                        download_link.innerText = "下载转换后的文件";
+                        download_link.innerText = "下载文件";
                         document.getElementById("download-link").innerHTML = "";
                         document.getElementById("download-link").appendChild(download_link);
                     } else {

@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"sync"
 	"time"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,7 +28,7 @@ func (s *Server) Run(wg *sync.WaitGroup) {
 	wg.Add(1)
 	defer wg.Done()
 
-	log.Printf("Controller Server started. %s\n", s.Addr)
+	log.Printf("Controller Server started. http://%s\n", s.Addr)
 
 	srv := &http.Server{
 		Addr:    s.Addr,
